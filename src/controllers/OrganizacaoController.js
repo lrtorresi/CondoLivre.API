@@ -21,7 +21,7 @@ module.exports = {
 
             var { Nome, CNPJ, Email, Telefone } = request.body;
             const Id = crypto.randomBytes(5).toString('HEX'); //gerar Id criptografado
-            console.log(Id, Nome, CNPJ, Email, Telefone)
+            
             await connection('organizacao').insert({
                 Id, Nome, CNPJ, Email, Telefone
             });
