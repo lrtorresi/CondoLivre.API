@@ -3,6 +3,7 @@ const crypto = require('crypto');
 
 module.exports = {
 
+    //Get organização
     async GetOrganizacao(request, response) {
         try {
 
@@ -21,7 +22,7 @@ module.exports = {
 
             var { Nome, CNPJ, Email, Telefone } = request.body;
             const Id = crypto.randomBytes(5).toString('HEX'); //gerar Id criptografado
-            
+
             await connection('organizacao').insert({
                 Id, Nome, CNPJ, Email, Telefone
             });
@@ -33,7 +34,7 @@ module.exports = {
         }
     },
 
-
+    //Atualizar Organização
     async UpdateOrganizacao(request, response) {
         try {
             const { Id } = request.params;

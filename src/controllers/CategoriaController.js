@@ -39,34 +39,35 @@ module.exports = {
         catch (ex) { return response.status(400).json({ msg: 'Não foi possivel cadastrar a categoria. Tente novamente' }) };
     },
 
-    async AtualizarCategoria(request, response){
-        try{
-            const {Id} = request.params;
-            var {Categoria} = request.body;
+    async AtualizarCategoria(request, response) {
+        try {
+            const { Id } = request.params;
+            var { Categoria } = request.body;
 
             //verifica se existe a categoria
             const result = await connection('Categorias').where('Id', Id).select('Id').first();
-            if (result == null) {return response.status(400).json({msg: 'Id da Categoria não encontrado'})};
+            if (result == null) { return response.status(400).json({ msg: 'Id da Categoria não encontrado' }) };
 
             await connection('Categorias').update({
                 Categoria
             });
             return response.status(200).json(Categoria);
         }
-        catch(ex){return response.status(400).json({msg: 'Não foi possivel atualizar a categoria. Tente novamente'})};
+        catch (ex) { return response.status(400).json({ msg: 'Não foi possivel atualizar a categoria. Tente novamente' }) };
     },
 
-    async DeleteCategoria(request, response){
-        try{
-            const {Id} = request.params;
+    //Deletear Categoria
+    async DeleteCategoria(request, response) {
+        try {
+            const { Id } = request.params;
 
             //verifica se existe a categoria
             const result = await connection('Categorias').where('Id', Id).select('Id').first();
-            if (result == null) {return response.status(400).json({msg: 'Id da Categoria não encontrado'})};
+            if (result == null) { return response.status(400).json({ msg: 'Id da Categoria não encontrado' }) };
 
             await connection('Categorias').where('Id', Id).delete();
-            return response.status(200).json({msg: 'Categoria excluída com sucesso'});
+            return response.status(200).json({ msg: 'Categoria excluída com sucesso' });
         }
-        catch(ex){return response.status(400).json({msg: 'Não foi possivel atualizar a categoria. Tente novamente'})};
+        catch (ex) { return response.status(400).json({ msg: 'Não foi possivel atualizar a categoria. Tente novamente' }) };
     }
 }
